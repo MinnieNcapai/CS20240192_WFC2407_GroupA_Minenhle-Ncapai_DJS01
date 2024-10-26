@@ -14,10 +14,6 @@ const initialFuel = 5000; // remaining fuel (kg)
 const fuelBurnRate = 0.5; // fuel burn rate (kg/s)
 
 
-const newDistance = initialDistance + ( initialVelocity*timeInSeconds) //calcultes new distance
-const remainingFuel  = initialFuel*timeInSeconds //calculates remaining fuel
-const newVelocity = calcNewVelocity(acceleration, initialVelocity, timeInSeconds) //calculates new velocity based on acceleration
-
 // Pick up an error with how the function below is called and make it robust to such errors
 
 // Function to calculate new velocity
@@ -25,7 +21,7 @@ const calcNewVelocity = (initialVelocity, acceleration, timeInSeconds) => {
   if (typeof initialVelocity !== 'number' || typeof acceleration !== 'number' ||typeof timeInSeconds !== 'number') {
       throw new Error('All parameters must be numbers');
         }
-         // Convert acceleration to km/h
+// Convert acceleration to km/h
  return initialVelocity + (acceleration * timeInSeconds * (3600/1000))
 }
 
@@ -34,8 +30,22 @@ const calcNewDistance =( initialDistance, initialVelocity,timeInSeconds) => {
   if (typeof initialDistance !== 'number' || typeof initialVelocity !== 'number' ||typeof timeInSeconds !== 'number') {
     throw new Error('All parameters must be numbers');
       }
-       //converts time from seconds to hours
+//converts time from seconds to hours
     return initialDistance + (initialVelocity * (timeInSeconds/3600)) //converts time from seconds to hours
+
+// Function to calculate remaining fuel
+const calcRemainingFuel = (initialFuel,fuelBurnRate,timeInSeconds) => {
+  if (typeof initialFuel !== 'number' || typeof fuelBurnRate !== 'number'|| typeof timeInSeconds !== 'number') {
+    throw new Error('Invalid input: Ensure initialFuel, fuelBurnRate and timeInSeconds are numbers.');
+      }
+//remaining fuel in kg
+   return initialFuel - (fuelBurnRate*timeInSeconds) //calculates remaining fuel
+    }  
+
+    
+const newDistance = initialDistance + ( initialVelocity*timeInSeconds) //calcultes new distance
+const remainingFuel  = initialFuel*timeInSeconds //calculates remaining fuel
+const newVelocity = calcNewVelocity(acceleration, initialVelocity, timeInSeconds) //calculates new velocity based on acceleration
     }
 
 console.log(`Corrected New Velocity: ${newVelocity} km/h`);
