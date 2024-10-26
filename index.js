@@ -32,7 +32,8 @@ const calcNewDistance =( initialDistance, initialVelocity,timeInSeconds) => {
       }
 //converts time from seconds to hours
     return initialDistance + (initialVelocity * (timeInSeconds/3600)) //converts time from seconds to hours
-
+    }
+    
 // Function to calculate remaining fuel
 const calcRemainingFuel = (initialFuel,fuelBurnRate,timeInSeconds) => {
   if (typeof initialFuel !== 'number' || typeof fuelBurnRate !== 'number'|| typeof timeInSeconds !== 'number') {
@@ -43,10 +44,10 @@ const calcRemainingFuel = (initialFuel,fuelBurnRate,timeInSeconds) => {
     }  
 
     
-const newDistance = initialDistance + ( initialVelocity*timeInSeconds) //calcultes new distance
-const remainingFuel  = initialFuel*timeInSeconds //calculates remaining fuel
-const newVelocity = calcNewVelocity(acceleration, initialVelocity, timeInSeconds) //calculates new velocity based on acceleration
-    }
+const newDistance = calcNewDistance(initialDistance, initialVelocity,timeInSeconds) //calcultes new distance
+const remainingFuel  =calcRemainingFuel( initialFuel, fuelBurnRate, timeInSeconds )//calculates remaining fuel
+const newVelocity = calcNewVelocity( initialVelocity,acceleration, timeInSeconds) //calculates new velocity based on acceleration
+    
 
 console.log(`Corrected New Velocity: ${newVelocity} km/h`);
 console.log(`Corrected New Distance: ${newDistance} km`);
