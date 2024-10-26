@@ -16,7 +16,7 @@ const fuelBurnRate = 0.5; // fuel burn rate (kg/s)
 
 const newDistance = initialDistance + ( initialVelocity*timeInSeconds) //calcultes new distance
 const remainingFuel  = initialFuel*timeInSeconds //calculates remaining fuel
-const newVelocity = calcNewVel(acceleration, initialVelocity, timeInSeconds) //calculates new velocity based on acceleration
+const newVelocity = calcNewVelocity(acceleration, initialVelocity, timeInSeconds) //calculates new velocity based on acceleration
 
 // Pick up an error with how the function below is called and make it robust to such errors
 
@@ -28,6 +28,15 @@ const calcNewVelocity = (initialVelocity, acceleration, timeInSeconds) => {
          // Convert acceleration to km/h
  return initialVelocity + (acceleration * timeInSeconds * (3600/1000))
 }
+
+// Function to calculate new distance
+const calcNewDistance =( initialDistance, initialVelocity,timeInSeconds) => { 
+  if (typeof initialDistance !== 'number' || typeof initialVelocity !== 'number' ||typeof timeInSeconds !== 'number') {
+    throw new Error('All parameters must be numbers');
+      }
+       //converts time from seconds to hours
+    return initialDistance + (initialVelocity * (timeInSeconds/3600)) //converts time from seconds to hours
+    }
 
 console.log(`Corrected New Velocity: ${newVelocity} km/h`);
 console.log(`Corrected New Distance: ${newDistance} km`);
